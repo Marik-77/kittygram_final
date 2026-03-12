@@ -35,6 +35,8 @@ services:
       - static_volume:/app/static
       - media_volume:/app/media
     restart: always
+    networks:
+      - kitty_network
   frontend:
     env_file: .env
     image: korsarr/kitty_frontend
@@ -42,6 +44,8 @@ services:
     volumes:
       - static_volume:/static
     restart: always
+    networks:
+      - kitty_network
   gateway:
     image: korsarr/kitty_gateway
     env_file: .env
@@ -51,6 +55,8 @@ services:
       - static_volume:/static
       - media_volume:/media
     restart: always
+    networks:
+      - kitty_network
 
 networks:
   kitty_network:
