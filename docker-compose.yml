@@ -2,7 +2,8 @@ version: '3'
 
 volumes:
   pg_data:
-  static:
+  static_volume:
+  media_volume:
 
 services:
   db:
@@ -12,16 +13,25 @@ services:
   backend:
     build: ./backend/
     env_file: .env
+    working_dir: /app
+    environment:
+      - PYTHONPATH=/app/cats
+      - DJANGO_SETTINGS_MODULE=kittygram_backend.settings
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
   frontend:
     env_file: .env
     build: ./frontend/
     command: cp -r /app/build/. /static/
     volumes:
-      - static:/static
+      - static_volume:/static
   gateway:
-    build: ./nginx/
+    build: ./gateway/
     env_file: .env
     ports:
-      - 9000:80
+      - 8000:80
     volumes:
-      - static:/static
+      - static_volume:/static
+      - media_volume:/app/media
+
