@@ -39,7 +39,7 @@ services:
       - kitty_network
   frontend:
     env_file: .env
-    image: korsarr/kitty_frontend
+    image: korsarr/kittygram_frontend
     command: cp -r /app/build/. /static/
     volumes:
       - static_volume:/static
