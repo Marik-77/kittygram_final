@@ -24,6 +24,7 @@ services:
       timeout: 5s
       retries: 5
   backend:
+    depends_on: db
     image: korsarr/kitty_backend
     env_file: .env
     working_dir: /app
@@ -38,6 +39,7 @@ services:
     networks:
       - kitty_network
   frontend:
+    depends_on: db
     env_file: .env
     image: korsarr/kittygram_frontend
     command: cp -r /app/build/. /static/
@@ -47,6 +49,7 @@ services:
     networks:
       - kitty_network
   gateway:
+    depends_on: db
     image: korsarr/kitty_gateway
     env_file: .env
     ports:

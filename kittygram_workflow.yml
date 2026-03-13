@@ -147,10 +147,10 @@ jobs:
             cd kitty
             if [ ! -f .env ]; then
               cat > .env << 'ENVFILE'
-            POSTGRES_USER=django_user
-            POSTGRES_PASSWORD=mysecretpassword
-            POSTGRES_DB=django
-            DB_HOST=db
+            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+            POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+            DB_HOST=${{ secrets.DB_HOST }}
             DB_PORT=5432
             ALLOWED_HOSTS=kittyfree.hopto.org,158.160.210.182
             DEBUG=False
