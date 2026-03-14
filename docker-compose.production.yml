@@ -42,6 +42,8 @@ services:
   frontend:
     depends_on: 
       - db
+      - gateway
+      - backend
     env_file: .env
     image: korsarr/kittygram_frontend
     command: cp -r /app/build/. /static/
@@ -53,6 +55,7 @@ services:
   gateway:
     depends_on: 
       - db
+      - backend
     image: korsarr/kitty_gateway
     env_file: .env
     ports:
