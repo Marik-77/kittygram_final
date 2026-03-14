@@ -41,7 +41,6 @@ services:
       - kitty_network
   frontend:
     depends_on: 
-      - db
       - gateway
       - backend
     env_file: .env
@@ -49,13 +48,13 @@ services:
     command: cp -r /app/build/. /static/
     volumes:
       - static_volume:/static
-    restart: always
     networks:
       - kitty_network
   gateway:
     depends_on: 
       - db
       - backend
+      - frontend
     image: korsarr/kitty_gateway
     env_file: .env
     ports:
