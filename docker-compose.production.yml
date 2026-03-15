@@ -41,7 +41,6 @@ services:
       - kitty_network
   frontend:
     depends_on:
-      - gateway
       - backend
     env_file: .env
     image: korsarr/kittygram_frontend
@@ -53,7 +52,6 @@ services:
   gateway:
     depends_on:
       - backend
-      - db
     image: korsarr/kitty_gateway
     env_file: .env
     ports:
